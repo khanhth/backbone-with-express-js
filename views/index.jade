@@ -3,3 +3,23 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  script(src='javascripts/jquery.js')
+  script(src='javascripts/underscore.js')
+  script(src='javascripts/backbone.js')
+  script(src='javascripts/main.js')
+  script(src='javascripts/models.js')
+  script(src='javascripts/collections.js')
+  script(src='javascripts/views.js')
+  script(src='javascripts/router.js')
+
+  script.
+    new App.Router;
+    Backbone.history.start();
+
+    App.contacts = new App.Collections.Contacts;
+
+    App.contacts.fetch().then(function() {
+      new App.Views.App({collection: App.contacts})
+    });
+
