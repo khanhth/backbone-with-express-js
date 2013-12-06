@@ -1,8 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class="alert alert-info alert-dismissable")
+    button(type="button", class="close", data-dismiss="alert", aria-hidden="true") &times;
+    div Welcome to Express with Backbone application
+  legend New Contact
+  form.form-horizontal(role="form")
+    div.form-group
+      label.col-sm-2(for="first_name") First name
+      div.col-sm-3
+        input#first_name.form-control(type="text", name="first_name")
 
   script(src='javascripts/jquery.js')
   script(src='javascripts/underscore.js')
