@@ -1,8 +1,13 @@
 App.Views.App = Backbone.View.extend({
   initialize: function() {
+    vent.on('contact:edit', this.editContact);
     var addContact = new App.Views.AddContact({collection: App.contacts});
-    var allContacts = new App.Views.Contacts({collection: App.contacts}).render();
+    var allContacts = new App.Views.Contacts({collection: App.contacts});
     $('#allContacts').append(allContacts.el);
+  },
+  editContact: function(contact) {
+    var editContactView = new App.Views.editContact({model: contact});
+    $('#editContact').html(editContactView.el);
   }
 });
 
@@ -46,7 +51,19 @@ App.Views.AddContact = Backbone.View.extend({
 /*
  * Edit Contact
  */
+ App.Views.editContact = Backbone.View.extend({
+  template: template('editContactTemplate'),
 
+  initialize: function() {
+    this.render();
+  },
+
+  render: function() {
+    console.log(this.model);
+    this.$el.append(this.template(this.model.toJSON()));
+  }
+
+ });
 
 /*
  * All Contact Views
@@ -57,6 +74,7 @@ App.Views.AddContact = Backbone.View.extend({
 
   initialize: function() {
     this.collection.on('sync', this.addOne, this);
+    this.render();
   },
 
   render: function() {
@@ -84,7 +102,13 @@ App.Views.AddContact = Backbone.View.extend({
     },
 
     events: {
-      'click .delete': 'deleteContact'
+      'click .delete': 'deleteContact',
+      'click .edit': 'editContact'
+    },
+
+    editContact: function(e) {
+      e.preventDefault();
+      vent.trigger('contact:edit', this.model);
     },
 
     deleteContact: function(e) {
@@ -93,7 +117,6 @@ App.Views.AddContact = Backbone.View.extend({
     },
 
     render: function() {
-      this.model.set('description', this.model.get('description') || 'N/A');
       this.$el.html(this.template(this.model.toJSON()));
       return this;
     },
