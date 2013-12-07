@@ -1,3 +1,6 @@
 .navbar-btn {
   margin-right: 10px;
 }
+#new-contact {
+  cursor: pointer;
+}

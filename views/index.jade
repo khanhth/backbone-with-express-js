@@ -4,29 +4,30 @@ block content
   div(class="alert alert-info alert-dismissable")
     button(type="button", class="close", data-dismiss="alert", aria-hidden="true") &times;
     div Welcome to Express with Backbone application
-  legend New Contact
-  form#addContact.form-horizontal(role="form")
-    div.form-group
-      label.col-sm-2(for="first_name") First name:
-      div.col-sm-3
-        input#first_name.form-control(type="text", name="first_name")
-    div.form-group
-      label.col-sm-2(for="last_name") Last name:
-      div.col-sm-3
-        input#last_name.form-control(type="text", name="last_name")
-    div.form-group
-      label.col-sm-2(for="email_address") Email Address:
-      div.col-sm-3
-        input#email_address.form-control(type="text", name="email_address")
-    div.form-group
-      label.col-sm-2(for="description") Description (optional):
-      div.col-sm-3
-        textarea#description.form-control(type="text", name="description")
-    div.form-group
-      div.col-sm-offset-2.col-sm-10
-        button.btn.btn-default(type="submit") Submit
+  div#addContact.hidden
+    form.addContact.form-horizontal(role="form")
+      div.form-group
+        label.col-sm-2(for="first_name") First name:
+        div.col-sm-3
+          input#first_name.form-control(type="text", name="first_name")
+      div.form-group
+        label.col-sm-2(for="last_name") Last name:
+        div.col-sm-3
+          input#last_name.form-control(type="text", name="last_name")
+      div.form-group
+        label.col-sm-2(for="email_address") Email Address:
+        div.col-sm-3
+          input#email_address.form-control(type="text", name="email_address")
+      div.form-group
+        label.col-sm-2(for="description") Description (optional):
+        div.col-sm-3
+          textarea#description.form-control(type="text", name="description")
+      div.form-group
+        div.col-sm-offset-2.col-sm-10
+          button.btn.btn-default(type="submit") Submit
 
-  h3 All contacts
+  legend All contacts
+    span.label.label-primary.pull-right#new-contact New
   table#allContacts.table
     thead
       tr

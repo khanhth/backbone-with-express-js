@@ -1,7 +1,7 @@
 App.Views.App = Backbone.View.extend({
   initialize: function() {
     vent.on('contact:edit', this.editContact);
-    var addContact = new App.Views.AddContact({collection: App.contacts});
+    var newContact = new App.Views.NewContact;
     var allContacts = new App.Views.Contacts({collection: App.contacts});
     $('#allContacts').append(allContacts.el);
   },
@@ -10,6 +10,22 @@ App.Views.App = Backbone.View.extend({
     $('#editContact').html(editContactView.el);
   }
 });
+
+/*
+ * New Contact
+ */
+ App.Views.NewContact = Backbone.View.extend({
+  el: "#new-contact",
+  events: {
+    'click': 'NewContact'
+  },
+
+  NewContact: function() {
+    var addContact = new App.Views.AddContact({collection: App.contacts});
+    addContact.show();
+  }
+ });
+
 
 /*
  * Add Contact View
@@ -26,7 +42,7 @@ App.Views.AddContact = Backbone.View.extend({
   },
 
   events: {
-    'submit': 'addContact'
+    'submit .addContact': 'addContact',
   },
 
   addContact: function(e) {
@@ -38,6 +54,11 @@ App.Views.AddContact = Backbone.View.extend({
       description: this.description.val()
     }, {wait: true});
     this.clearForm();
+    this.$el.addClass('hidden');
+  },
+
+  show: function() {
+    this.$el.removeClass('hidden');
   },
 
   clearForm: function() {
@@ -133,7 +154,8 @@ App.Views.AddContact = Backbone.View.extend({
 
     deleteContact: function(e) {
       e.preventDefault();
-      this.model.destroy({wait: true});
+      var next = confirm("Are you sure you want to delete contact?");
+      next ? this.model.destroy({wait: true}) : undefined;
     },
 
     render: function() {
