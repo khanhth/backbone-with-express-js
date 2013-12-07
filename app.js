@@ -13,7 +13,7 @@ var app = express();
 
 // all environments
 
-var dbURL =   'mongodb://localhost/backbone_express';
+var dbURL =  process.env.MONGOLAB_URI || 'mongodb://localhost/backbone_express';
 var db = require('mongoose').connect(dbURL,  function (err, res) {
   if (err) { 
     console.log ('ERROR connecting to: ' + dbURL + '. ' + err);
