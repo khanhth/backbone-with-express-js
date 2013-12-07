@@ -44,6 +44,11 @@ App.Views.AddContact = Backbone.View.extend({
 });
 
 /*
+ * Edit Contact
+ */
+
+
+/*
  * All Contact Views
  */
 
@@ -74,9 +79,26 @@ App.Views.AddContact = Backbone.View.extend({
 
     template: template('allContactsTemplate'),
 
+    initialize: function() {
+      this.model.on('destroy', this.unrender, this);
+    },
+
+    events: {
+      'click .delete': 'deleteContact'
+    },
+
+    deleteContact: function(e) {
+      e.preventDefault();
+      this.model.destroy({wait: true});
+    },
+
     render: function() {
       this.model.set('description', this.model.get('description') || 'N/A');
       this.$el.html(this.template(this.model.toJSON()));
       return this;
+    },
+
+    unrender: function() {
+      this.$el.remove();
     }
   })

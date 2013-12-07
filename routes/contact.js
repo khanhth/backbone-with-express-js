@@ -22,12 +22,12 @@ module.exports = function(app){
   });
 
   app.del('/contacts/:id', function(req, res) {
-    Contact.remove({_id: req.params.id}, function(err, contact) {
+    Contact.remove({_id: req.params.id}, function(err, result) {
       if(err) {
         throw err;
       }
-      console.log(contact);
-      res.send('Doc deleted!\n');
+      console.log('Doc was deleted!\n');
+      return res.send({id: req.params.id}, 200);
     })
   });
 

@@ -7,5 +7,6 @@ App.Models.Contact = Backbone.Model.extend({
     if ( ! attrs.email_address ) {
       return 'Please enter a valid email address.';
     }
-  }
+  },
+  idAttribute: "_id"
 });

@@ -29,13 +29,44 @@ block content
   h3 All contacts
   table#allContacts.table
     thead
+      tr
+        th First name
+        th Last name
+        th Email address
+        th Description
+        th Options
   div#footer(style="padding-top: 20px;")
 
   script#allContactsTemplate(type="text/template")
     td <%= first_name %> 
     td <%= last_name %> 
     td <%= email_address %> 
-    td <%= description %> 
+    td <%= description %>
+    td 
+      a.edit(href!="#<%=_id%>/edit") Edit
+      | &nbsp;|&nbsp; 
+      a.delete(href!="#<%=_id%>/delete") Delete
+  script#editContactTemplate(type="text/template")
+    form#editContact.form-horizontal(role="form")
+      div.form-group
+        label.col-sm-2(for="first_name") First name:
+        div.col-sm-3
+          input#first_name.form-control(type="text", name="first_name", val!="<%=first_name%>")
+      div.form-group
+        label.col-sm-2(for="last_name") Last name:
+        div.col-sm-3
+          input#last_name.form-control(type="text", name="last_name", val!="<%=last_name%>")
+      div.form-group
+        label.col-sm-2(for="email_address") Email Address:
+        div.col-sm-3
+          input#email_address.form-control(type="text", name="email_address", val!="<%=email_address%>")
+      div.form-group
+        label.col-sm-2(for="description") Description (optional):
+        div.col-sm-3
+          textarea#description.form-control(type="text", name="description")!= "<%=description%>"
+      div.form-group
+        div.col-sm-offset-2.col-sm-10
+          button.btn.btn-default(type="submit") Submit
 
 
   // script(src='javascripts/jquery.js')
