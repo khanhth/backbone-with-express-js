@@ -67,9 +67,11 @@ block content
         label.col-sm-2(for="edit_description") Description (optional):
         div.col-sm-3
           textarea#edit_description.form-control(type="text", name="edit_description")!= "<%=description%>"
+      
       div.form-group
         div.col-sm-offset-2.col-sm-10
-          button.btn.btn-default(type="submit") Submit
+          button.btn.btn-warning.cancel(type="button") Cancel
+          button.btn.btn-primary(type="submit") Submit
 
 
   // script(src='javascripts/jquery.js')

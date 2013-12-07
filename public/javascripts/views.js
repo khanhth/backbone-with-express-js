@@ -58,8 +58,27 @@ App.Views.AddContact = Backbone.View.extend({
     this.render();
   },
 
+  events: {
+    'submit': 'submit',
+    'click .cancel': 'cancel'
+  },
+
+  submit: function(e) {
+    e.preventDefault();
+    this.model.save({
+      first_name: this.$('form').find('#edit_first_name').val(),
+      last_name: this.$('form').find('#edit_last_name').val(),
+      email_address: this.$('form').find('#edit_email_address').val(),
+      description: this.$('form').find('#edit_description').val(),
+    });
+    this.$el.remove();
+  },
+
+  cancel: function() {
+    this.$el.remove();
+  },
+
   render: function() {
-    console.log(this.model);
     this.$el.append(this.template(this.model.toJSON()));
   }
 
@@ -98,6 +117,7 @@ App.Views.AddContact = Backbone.View.extend({
     template: template('allContactsTemplate'),
 
     initialize: function() {
+      this.model.on('change', this.render, this);
       this.model.on('destroy', this.unrender, this);
     },
 

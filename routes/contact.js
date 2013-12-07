@@ -32,6 +32,7 @@ module.exports = function(app){
   });
 
   app.put('/contacts/:id', function(req, res) {
+    delete req.body._id;
     Contact.update({_id: req.params.id}, req.body, function(err, contact) {
       if(err) {
         throw err;
