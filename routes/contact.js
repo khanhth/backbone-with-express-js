@@ -16,7 +16,8 @@ module.exports = function(app){
       if(err) {
         throw err;
       }
-      res.send("Doc created!\n");
+      console.log("Doc created!\n");
+      res.send(contact);
     });
   });
 
