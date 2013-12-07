@@ -5,13 +5,40 @@ block content
     button(type="button", class="close", data-dismiss="alert", aria-hidden="true") &times;
     div Welcome to Express with Backbone application
   legend New Contact
-  form.form-horizontal(role="form")
+  form#addContact.form-horizontal(role="form")
     div.form-group
-      label.col-sm-2(for="first_name") First name
+      label.col-sm-2(for="first_name") First name:
       div.col-sm-3
         input#first_name.form-control(type="text", name="first_name")
+    div.form-group
+      label.col-sm-2(for="last_name") Last name:
+      div.col-sm-3
+        input#last_name.form-control(type="text", name="last_name")
+    div.form-group
+      label.col-sm-2(for="email_address") Email Address:
+      div.col-sm-3
+        input#email_address.form-control(type="text", name="email_address")
+    div.form-group
+      label.col-sm-2(for="description") Description (optional):
+      div.col-sm-3
+        textarea#description.form-control(type="text", name="description")
+    div.form-group
+      div.col-sm-offset-2.col-sm-10
+        button.btn.btn-default(type="submit") Submit
 
-  script(src='javascripts/jquery.js')
+  h3 All contacts
+  table#allContacts.table
+    thead
+
+  script#allContactsTemplate(type="text/template")
+    td <%= first_name %> 
+    td <%= last_name %> 
+    td <%= email_address %> 
+    td <%= description %> 
+
+
+  // script(src='javascripts/jquery.js')
+  script(type="text/javascript", src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js")
   script(src='javascripts/underscore.js')
   script(src='javascripts/backbone.js')
   script(src='javascripts/main.js')
